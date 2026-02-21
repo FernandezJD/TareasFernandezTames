@@ -1,0 +1,48 @@
+#Un método "filtrar_vocales" recibe dos parámetros: Cadena y Bandera.
+#Debe verificar que el parámetro cadena sea un string. En caso de no cumplir esta limitación el código retorna un código de error único.
+#Debe verificar que el parámetro cadena solo contenga letras del abecedario. En caso de no cumplir esta limitación el código retorna un código de error único.
+#Debe verificar que el parámetro cadena no sea un string vacío. En caso de no cumplir esta limitación el código retorna un código de error único.
+#Debe verificar que el parámetro cadena no sea mayor a 30 caracteres. En caso de no cumplir esta limitación el código retorna un código de error único.
+#Debe verificar que el parámetro “bandera” sea un booleano (True o False). En caso de no cumplir esta limitación el código retorna un código de error único.
+#Si la bandera es True, el método retorna un string que contiene solo las vocales (a, e, i, o, u, A, E, I, O, U) de la cadena original en el mismo orden que aparecen.
+#Si la bandera es False, el método retorna un string que contiene solo las consonantes de la cadena original en el mismo orden que aparecen.
+#En caso de ejecutar correctamente debe de retornar un código de éxito único.
+#El método siempre devuelve dos valores. El código de error/éxito y el string filtrado en ese orden específico. En los casos con código de error en vez de retornar el string filtrado se retorna None.
+
+def filtrar_vocales(cadena, bandera):
+    # Códigos de retorno
+    ERROR_NO_STRING = 1
+    ERROR_NO_LETRAS = 2
+    ERROR_VACIO = 3
+    ERROR_LONGITUD = 4
+    ERROR_NO_BOOLEANO = 5
+    EXITO = 0
+
+    # a. Verificar que cadena sea un string
+    if not isinstance(cadena, str):
+        return ERROR_NO_STRING, None
+
+    # b. Verificar que solo contenga letras
+    if not cadena.isalpha():
+        return ERROR_NO_LETRAS, None
+
+    # c. Verificar que no sea vacío
+    if len(cadena) == 0:
+        return ERROR_VACIO, None
+
+    # d. Verificar que no supere 30 caracteres
+    if len(cadena) > 30:
+        return ERROR_LONGITUD, None
+
+    # e. Verificar que bandera sea booleano
+    if not isinstance(bandera, bool):
+        return ERROR_NO_BOOLEANO, None
+
+    # f. y g. Filtrar según bandera
+    vocales = set("aeiouAEIOU")
+    if bandera:
+        resultado = "".join(c for c in cadena if c in vocales)
+    else:
+        resultado = "".join(c for c in cadena if c not in vocales)
+
+    return EXITO, resultado
